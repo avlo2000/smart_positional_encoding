@@ -1,6 +1,6 @@
 import torch
 from torch import nn, optim
-from postional_encoding.utils import cross_sample_correlations_goal
+from goal_matrices import cross_sample_correlations_goal
 
 
 class TunedEncoding(nn.Module):
@@ -32,8 +32,8 @@ class TunedEncoding(nn.Module):
             loss.backward()
             opt.step()
             opt.zero_grad()
-            if self.verbose == 1:
-                print(loss)
+            if self.verbose == 2:
+                print(f"Residual for current embedding: {loss.item()}")
         return mat
 
     @staticmethod
